@@ -11,7 +11,6 @@
         int p50;
         int p75;
         int max;
-        std::cout<<(int)(((75 * data.size()) / 100 )- 1)<<std::endl;
         std::vector<int> k_val{(int)data.size()/2-1,(int)data.size()/4-1,(int)(((75 * data.size()) / 100 )- 1),0,(int)data.size()-1};
         //Sorting code
         quickSelect(data, 0, data.size() - 1, k_val, result);
