@@ -48,7 +48,7 @@ void quickSelect1 (const std::string & header, std::vector<int> data){
  9 */
 void quickSelect(std::vector<int>& data, int left, int right, int k )
  {
-  if( left + 10 <= right )
+  if( left + 20 <= right )
   {
     const int & pivot = median3( data, left, right );
     

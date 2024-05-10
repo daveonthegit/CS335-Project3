@@ -26,7 +26,7 @@ int main(){
     std::vector<int> read_testdata;
     std::vector<int> read_testdata2;
     std::vector<int> read_testdata3;
-    
+
     if (input_testdata.is_open()) {
         std::string line;
         std::getline(input_testdata, line);
@@ -70,7 +70,7 @@ int main(){
         input_testdata3.close();
     }
     //stdSort(header_testdata,read_testdata);
-    quickSelect1(header_testdata,read_testdata);
-    //quickSelect2(header_testdata,read_testdata);
+    //quickSelect1(header_testdata,read_testdata);
+    quickSelect2(header_testdata,read_testdata);
     //countingSort(header_testdata,read_testdata);
 }
