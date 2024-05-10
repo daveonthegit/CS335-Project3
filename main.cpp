@@ -26,7 +26,7 @@ int main(){
     std::vector<int> read_testdata;
     std::vector<int> read_testdata2;
     std::vector<int> read_testdata3;
-
+    
     if (input_testdata.is_open()) {
         std::string line;
         std::getline(input_testdata, line);
@@ -66,7 +66,7 @@ int main(){
                 read_testdata3.push_back(value);
             }
         }
-    
+
         input_testdata3.close();
     }
     //stdSort(header_testdata,read_testdata);
