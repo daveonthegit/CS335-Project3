@@ -17,9 +17,9 @@ void quickSelect1 (const std::string & header, std::vector<int> data){
     p25 = data[data.size()/4-1];
     quickSelect(data, data.size()/2, data.size(), ((data.size()/4)+(data.size()/2))-1);
     p75 = data[((data.size()/4)+(data.size()/2))-1];
-    quickSelect(data, 0, data.size()/4, 0);
+    insertionSort(data, 0, data.size()/4);
     min = data[0];
-    quickSelect(data, ((data.size()/4)+(data.size()/2))-1, data.size(), data.size()-1);
+    insertionSort(data, ((data.size()/4)+(data.size()/2))-1, data.size());
     max = data[data.size()-1];
 
 
