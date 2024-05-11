@@ -1,8 +1,10 @@
+// David Xiao
+// CountingSort.cpp
+
 #include "CountingSort.hpp"
 
 void countingSort(const std::string& header, std::vector<int> data) {
     const auto time_start = std::chrono::steady_clock::now();
-
 
     int N = data.size();
     if (N == 0) {
@@ -37,11 +39,9 @@ void countingSort(const std::string& header, std::vector<int> data) {
     // Output
     std::cout << header << std::endl;
     std::cout << "Min: " << outputArray[0] << std::endl;
-    std::cout << "P25: " << outputArray[N / 4] << std::endl;
+    std::cout << "P25: " << outputArray[N / 4-1] << std::endl;
     std::cout << "P50: " << outputArray[N / 2] << std::endl;
-    std::cout << "P75: " << outputArray[3 * N / 4] << std::endl;
+    std::cout << "P75: " << outputArray[3 * N / 4-1] << std::endl;
     std::cout << "Max: " << outputArray[N - 1] << std::endl;
     std::cout << "Data Points: " << data_points << std::endl;
 }
-
-
