@@ -69,7 +69,7 @@ int main(){
 
         input_testdata3.close();
     }
-    //stdSort(header_testdata,read_testdata);
+    stdSort(header_testdata,read_testdata);
     //quickSelect1(header_testdata,read_testdata);
     quickSelect2(header_testdata,read_testdata);
     //countingSort(header_testdata,read_testdata);

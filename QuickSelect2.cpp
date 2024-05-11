@@ -11,12 +11,12 @@
         int p50;
         int p75;
         int max;
-            std::vector<int> k_val{0,(int)data.size()/4-1,(int)data.size()/2-1,(int)(((75 * data.size()) / 100 )- 1),(int)data.size()-1};
+            std::vector<int> k_val{0,(int)data.size()/4-1,(int)data.size()/2-1,(int)((( data.size()/4)*3 )- 1),(int)data.size()-1};
         //Sorting code
-        quickSelect(data, 0, data.size() - 1, k_val, result);
+        quickSelect(data, 0, data.size() - 1, k_val);
         p50 = data[data.size()/2 - 1];
-        p25 = resudatalt[data.size()/4 -1];
-        p75 = data[data.size()/4 +data.size()/2 -1];
+        p25 = data[data.size()/4 -1];
+        p75 = data[(data.size()/4) *3 -1 ];
         min = data[0];
         max = data[data.size()-1];
 
@@ -57,7 +57,7 @@
                 j--;
             }
             if(i<=j){
-                std::swap(data[i],datapj);
+                std::swap(data[i],data[j]);
                 i++;
                 j--;
             }
@@ -71,14 +71,29 @@
             }
         }
         if(!lhs.empty()){
-            quickSelect(data,left,i-1,lhs,result);
+            quickSelect(data,left,i-1,lhs);
         }
         if(!rhs.empty()){
-            quickselect(data,i,right,rhs,result);
+            quickSelect(data,i,right,rhs);
         }
 
     } else {
-        insertionSort(data, left, right);
+        insertionSortQS2(data, left, right);
 
+    }
+}
+
+
+void insertionSortQS2(std::vector<int> & data, int left, int right) {
+    int key;
+    for (left = 1; left < data.size(); left++) {
+        key = data[left];
+        right = left - 1;
+
+        while (right >= 0 && data[right] > key) {
+            data[right + 1] = data[right];
+            right = right - 1;
+        }
+        data[right + 1] = key;
     }
 }
