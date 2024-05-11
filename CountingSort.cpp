@@ -1,35 +1,29 @@
-#include <iostream>
-#include <vector>
-#include <unordered_map>
-#include <algorithm>
-#include <chrono>
+#include "CountingSort.hpp"
 
 void countingSort(const std::string& header, std::vector<int> data) {
     auto start = std::chrono::high_resolution_clock::now();
 
     int N = data.size();
+    if (N == 0) {
+        std::cerr << "Error: Empty input data.\n";
+        return;
+    }
+
     int M = *std::max_element(data.begin(), data.end()); // Finding the maximum element
-    std::unordered_map<int, int> countMap; // Hash map to store counts of each data value
+    std::vector<int> countArray(M + 1, 0);
 
     // Counting occurrences of each data value
     for (int i = 0; i < N; i++) {
-        countMap[data[i]]++; // Update count of data value
+        countArray[data[i]]++; // Increment count for data value
     }
 
-    // Calculating prefix sum at every index of array countArray[]
-    std::vector<int> countArray(M + 1, 0);
-    for (const auto& pair : countMap) {
-        countArray[pair.first] = pair.second;
-    }
-
-    for (int i = 1; i <= M; i++)
-        countArray[i] += countArray[i - 1];
-
-    // Creating outputArray[] from countArray[] array
+    // Creating sorted output array
     std::vector<int> outputArray(N);
-    for (int i = N - 1; i >= 0; i--) {
-        outputArray[countArray[data[i]] - 1] = data[i];
-        countArray[data[i]]--;
+    int idx = 0;
+    for (int i = 0; i <= M; i++) {
+        for (int j = 0; j < countArray[i]; j++) {
+            outputArray[idx++] = i; // Place data value in output array
+        }
     }
 
     auto end = std::chrono::high_resolution_clock::now();
@@ -37,15 +31,16 @@ void countingSort(const std::string& header, std::vector<int> data) {
     std::chrono::duration<double> duration = end - start;
 
     // Calculate the number of unique data points
-    int data_points = countMap.size();
+    int data_points = std::count_if(countArray.begin(), countArray.end(), [](int count) { return count > 0; });
 
     // Output
     std::cout << header << std::endl;
     std::cout << "Min: " << outputArray[0] << std::endl;
-    std::cout << "P25: " << outputArray[N / 4 - 1] << std::endl;
+    std::cout << "P25: " << outputArray[N / 4] << std::endl;
     std::cout << "P50: " << outputArray[N / 2] << std::endl;
-    std::cout << "P75: " << outputArray[N / 4 + N / 2 - 1] << std::endl;
+    std::cout << "P75: " << outputArray[3 * N / 4] << std::endl;
     std::cout << "Max: " << outputArray[N - 1] << std::endl;
     std::cout << "Data Points: " << data_points << std::endl;
 }
+
 
