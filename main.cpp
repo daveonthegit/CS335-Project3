@@ -69,8 +69,17 @@ int main(){
 
         input_testdata3.close();
     }
-    stdSort(header_testdata,read_testdata);
+    //stdSort(header_testdata,read_testdata);
+    //stdSort(header_testdata2,read_testdata2);
+    //stdSort(header_testdata3,read_testdata3);
     //quickSelect1(header_testdata,read_testdata);
-    quickSelect2(header_testdata,read_testdata);
+   //quickSelect1(header_testdata2,read_testdata2);
+    //quickSelect1(header_testdata3,read_testdata3);
+    //quickSelect2(header_testdata,read_testdata);
+    //quickSelect2(header_testdata2,read_testdata2);
+    //quickSelect2(header_testdata3,read_testdata3);      
     countingSort(header_testdata,read_testdata);
+    countingSort(header_testdata2,read_testdata2);
+    countingSort(header_testdata3,read_testdata3);
+
 }
