@@ -4,7 +4,7 @@
 #include "QuickSelect1.hpp"
 
 void quickSelect1 (const std::string & header, std::vector<int> data){
-    auto start = std::chrono::high_resolution_clock::now();
+    const auto time_start = std::chrono::steady_clock::now();
     int min;
     int p25;
     int p50;
@@ -23,10 +23,10 @@ void quickSelect1 (const std::string & header, std::vector<int> data){
     max = data[data.size()-1];
 
 
-    auto end = std::chrono::high_resolution_clock::now();
-    // Calculate the duration in milliseconds
-    std::chrono::duration<double> duration = end - start;
-    //std::cout << "\nSort Completed in: " << duration.count() * 1000 << " milliseconds\n";
+    const auto time_end = std::chrono::steady_clock::now();
+    // Calculate the duration in microseconds
+    int time = std::chrono::duration <double, std::micro> (time_end - time_start).count();
+    //std::cout << "\n" << time << " microseconds." << std::endl;
 
     //Output
     std::cout<<header<<std::endl;
@@ -77,18 +77,3 @@ void quickSelect(std::vector<int>& data, int left, int right, int k )
  }
  }
 
-  const int & median3( std::vector<int> & a, int left, int right )
- {
-    int center = ( left + right ) / 2;
-
-    if( a[ center ] < a[ left ] )
-        std::swap( a[ left ], a[ center ] );
-    if( a[ right ] < a[ left ] )
-        std::swap( a[ left ], a[ right ] );
-    if( a[ right ] < a[ center ] )
-        std::swap( a[ center ], a[ right ] );
-    
-    // Place pivot at position right- 1
-        std::swap( a[ center ], a[ right- 1 ] );
-    return a[ right- 1 ];
- }

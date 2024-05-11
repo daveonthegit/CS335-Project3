@@ -1,7 +1,8 @@
 #include "CountingSort.hpp"
 
 void countingSort(const std::string& header, std::vector<int> data) {
-    auto start = std::chrono::high_resolution_clock::now();
+    const auto time_start = std::chrono::steady_clock::now();
+
 
     int N = data.size();
     if (N == 0) {
@@ -26,10 +27,10 @@ void countingSort(const std::string& header, std::vector<int> data) {
         }
     }
 
-    auto end = std::chrono::high_resolution_clock::now();
-    // Calculate the duration in milliseconds
-    std::chrono::duration<double> duration = end - start;
-
+    const auto time_end = std::chrono::steady_clock::now();
+    // Calculate the duration in microseconds
+    int time = std::chrono::duration <double, std::micro> (time_end - time_start).count();
+    //std::cout << "\n" << time << " microseconds." << std::endl;
     // Calculate the number of unique data points
     int data_points = std::count_if(countArray.begin(), countArray.end(), [](int count) { return count > 0; });
 

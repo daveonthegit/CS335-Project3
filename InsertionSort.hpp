@@ -10,6 +10,8 @@
 #include <algorithm>
 #include <iostream>
 void insertionSort ( std::vector<int>&data, int left, int right );
+void insertionSort2(std::vector<int>& a, int left, int right);
+const int & median3(std::vector<int>& a, int left, int right);
 
 
 #endif
