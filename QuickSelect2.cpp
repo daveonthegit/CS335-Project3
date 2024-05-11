@@ -14,11 +14,11 @@
             std::vector<int> k_val{0,(int)data.size()/4-1,(int)data.size()/2-1,(int)(((75 * data.size()) / 100 )- 1),(int)data.size()-1};
         //Sorting code
         quickSelect(data, 0, data.size() - 1, k_val, result);
-        p50 = result[0];
-        p25 = result[1];
-        p75 = result[2];
-        min = result[3];
-        max = result[4];
+        p50 = data[data.size()/2 - 1];
+        p25 = resudatalt[data.size()/4 -1];
+        p75 = data[data.size()/4 +data.size()/2 -1];
+        min = data[0];
+        max = data[data.size()-1];
 
 
         auto end = std::chrono::high_resolution_clock::now();
@@ -44,7 +44,7 @@
     7 * right is the right-most index of the subarray.
     8 * k is the desired rank (1 is minimum) in the entire array.
     9 */
-   void quickSelect(std::vector<int>& data, int left, int right, const std::vector<int>& k_val, std::vector<int>& result) {
+   void quickSelect(std::vector<int>& data, int left, int right, const std::vector<int>& k_val) {
     if (left + 20 <= right) {
         const int& pivot = median3(data, left, right);
         
@@ -71,24 +71,14 @@
             }
         }
         if(!lhs.empty()){
-            quickSelect(data,left,i-1,lhs);
+            quickSelect(data,left,i-1,lhs,result);
         }
         if(!rhs.empty()){
-            quickselect(data,i,right,rhs);
+            quickselect(data,i,right,rhs,result);
         }
+
     } else {
         insertionSort(data, left, right);
-        for (size_t idx = 0; idx < k_val.size(); ++idx) {
-            if (k_val[idx] == left) {
-                result[idx] = data[left];
-            }
-        }
-        for (int i = left + 1; i <= right; ++i) {
-            for (size_t idx = 0; idx < k_val.size(); ++idx) {
-                if (k_val[idx] == i) {
-                    result[idx] = data[i];
-                }
-            }
-        }
+
     }
 }
