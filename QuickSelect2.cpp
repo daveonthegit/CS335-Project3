@@ -11,7 +11,7 @@
         int p50;
         int p75;
         int max;
-            std::vector<int> k_val{(int)data.size()/2-1,(int)data.size()/4-1,(int)(((75 * data.size()) / 100 )- 1),0,(int)data.size()-1};
+            std::vector<int> k_val{0,(int)data.size()/4-1,(int)data.size()/2-1,(int)(((75 * data.size()) / 100 )- 1),(int)data.size()-1};
         //Sorting code
         quickSelect(data, 0, data.size() - 1, k_val, result);
         p50 = result[0];
@@ -49,28 +49,32 @@
         const int& pivot = median3(data, left, right);
         
         int i = left, j = right - 1;
-        for (;;) {
-            while (data[++i] < pivot) {}
-            while (pivot < data[--j]) {}
-            if (i < j)
-                std::swap(data[i], data[j]);
-            else
-                break;
-        }
-
-        std::swap(data[i], data[right - 1]); // Restore pivot
-        
-        // Update result for the percentiles within the current partition
-        for (size_t idx = 0; idx < k_val.size(); ++idx) {
-            if (left <= k_val[idx] && k_val[idx] <= right) {
-                if (k_val[idx] == i) {
-                    result[idx] = data[i];
-                } else if (k_val[idx] < i) {
-                    quickSelect(data, left, i - 1, k_val, result);
-                } else {
-                    quickSelect(data, i + 1, right, k_val, result);
+        while(i<=j){
+            while(data[i]<pivot){
+                i++;
                 }
+            while(data[j]>pivot){
+                j--;
             }
+            if(i<=j){
+                std::swap(data[i],datapj);
+                i++;
+                j--;
+            }
+        }
+        std::vector<int> lhs,rhs;// initialize for lhs and rhs of keys
+        for(auto k:k_val){
+            if(k<i){
+                lhs.push_back(k);
+            }else if(k >i){
+                rhs.push_back(k);
+            }
+        }
+        if(!lhs.empty()){
+            quickSelect(data,left,i-1,lhs);
+        }
+        if(!rhs.empty()){
+            quickselect(data,i,right,rhs);
         }
     } else {
         insertionSort(data, left, right);
