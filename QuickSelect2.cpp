@@ -1,10 +1,8 @@
     //David Xiao
     //Project 3 QuickSelect2.cpp
-    #include "InsertionSort.hpp"
     #include "QuickSelect2.hpp"
 
     void quickSelect2 (const std::string & header, std::vector<int> data){
-        std::vector<int> result{-1,-1,-1,-1,-1};
         auto start = std::chrono::high_resolution_clock::now();
         int min;
         int p25;
