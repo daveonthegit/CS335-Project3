@@ -1,30 +1,25 @@
-#include "CountingSort.hpp"
+#include <iostream>
+#include <vector>
 #include <unordered_map>
 #include <algorithm>
 #include <chrono>
+
 void countingSort(const std::string& header, std::vector<int> data) {
     auto start = std::chrono::high_resolution_clock::now();
 
     int N = data.size();
-    int data_points = 0; // Track the total number of unique data points
-    int M = 0; // Finding the maximum element of array inputArray[].
-    std::unordered_map<int, bool> uniqueMap; // Hash map to store whether a value is unique
+    int M = *std::max_element(data.begin(), data.end()); // Finding the maximum element
+    std::unordered_map<int, int> countMap; // Hash map to store counts of each data value
 
-    // Counting unique data points
+    // Counting occurrences of each data value
     for (int i = 0; i < N; i++) {
-        // Check if the current value has been encountered before
-        if (uniqueMap.find(data[i]) == uniqueMap.end()) {
-            // If not encountered before, increment data_points
-            data_points++;
-            uniqueMap[data[i]] = true; // Mark this value as unique
-        }
-        M = std::max(M, data[i]); // Finding the maximum element
+        countMap[data[i]]++; // Update count of data value
     }
 
-    // Sorting the data
+    // Calculating prefix sum at every index of array countArray[]
     std::vector<int> countArray(M + 1, 0);
-    for (int i = 0; i < N; i++) {
-        countArray[data[i]]++; // Update count of data value
+    for (const auto& pair : countMap) {
+        countArray[pair.first] = pair.second;
     }
 
     for (int i = 1; i <= M; i++)
@@ -41,6 +36,9 @@ void countingSort(const std::string& header, std::vector<int> data) {
     // Calculate the duration in milliseconds
     std::chrono::duration<double> duration = end - start;
 
+    // Calculate the number of unique data points
+    int data_points = countMap.size();
+
     // Output
     std::cout << header << std::endl;
     std::cout << "Min: " << outputArray[0] << std::endl;
@@ -50,3 +48,4 @@ void countingSort(const std::string& header, std::vector<int> data) {
     std::cout << "Max: " << outputArray[N - 1] << std::endl;
     std::cout << "Data Points: " << data_points << std::endl;
 }
+
